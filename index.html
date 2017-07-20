@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PDF.js使用示例</title>
+  <style>
+    body {
+      background-color: #3e3e3e;
+    }
+    .title {
+      color: #eee;
+      text-align: center;
+    }
+    .canvas-wp {
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">PDF demo</h1>
+  <div id="j_viewer" class="viewer"></div>
+
+  <script src="src/plugins/pdf.js"></script>
+  <!--<script src="src/plugins/pdf.worker.js"></script>-->
+  <script src="src/pdf.pack.js"></script>
+
+  <script>
+    PDF('test.pdf', 'j_viewer', {
+      scale: 1.5,
+      canvasWrapClass: 'canvas-wp'
+    });
+  </script>
+</body>
+</html>
