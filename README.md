@@ -3,6 +3,8 @@
 
 另外内嵌了加载样式。
 
+[demo](https://lwenn.github.io/pdf-viewer-easy/)
+
 ### API
 `PDF(pdfUrl, container, options)`
 
