@@ -8,7 +8,7 @@
 
   // PDFJS.workerSrc = 'src/plugins/pdf.worker.js';
 
-  // 获取屏幕 分辨率/物理像素 比例
+  // 获取屏幕 物理像素 / 设备独立像素dip 比例
   var PIXEL_RATIO = (function () {
     var ctx = document.createElement("canvas").getContext("2d"),
       dpr = window.devicePixelRatio || 1,
@@ -41,6 +41,7 @@
    * @param container {String} 显示pdf的容器id
    * @param options {Object}
    *      - scale {Number} 默认值：1
+   *      - width {Number} 默认值：'auto'
    *      - numPages {Number} 默认值：'auto'
    *      - canvasClass {String}
    *      - canvasWrap {String} 默认值：'div'
@@ -51,6 +52,7 @@
   window.PDF = function(pdfUrl, container, options) {
     var cfg = {
       scale: 1,
+      width: 'auto',
       numPages: 'auto',
       canvasClass: '',
       canvasWrap: 'div',
@@ -80,8 +82,12 @@
       var numPages = (typeof cfg.numPages === 'number') ? cfg.numPages : pdf.numPages;
       for (var i = 0; i < numPages; i++) {
         pdf.getPage(i + 1).then(function(page) {
-          // 设置文档显示比例
-          var viewport = page.getViewport(cfg.scale);
+          // 设置文档显示比例，width 优先级高于 scale
+          var scale = cfg.scale;
+          if (cfg.width > 0) {
+            scale = cfg.width / page.getViewport(1).width;
+          }
+          var viewport = page.getViewport(scale);
 
           var canvasWrap = document.createElement(cfg.canvasWrap);
           var canvas = document.createElement('canvas');

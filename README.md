@@ -13,6 +13,7 @@
 * `container` {String} 必填，显示pdf的容器id
 * `options` {Object}：可选
     - `scale` {Number} 默认值：1
+    - `width` {Number} 默认值：'auto'（新增，设置`width`后，`scale`的值会被忽略）
     - `numPages` {Number} 默认值：'auto'
     - `canvasClass` {String}
     - `canvasWrap` {String} 默认值：'div'
